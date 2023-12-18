@@ -56,3 +56,6 @@ Sistema de asignación actual:
         -Origen de datos
         -DashBoard
         - Modelos de Datos
+
+Aquí estan los datos de renta media por municipio
+https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfmunicipios_ccaa/2021/jrubikf3e948b7305092b26066cced2a0801e4af654b56b.html
