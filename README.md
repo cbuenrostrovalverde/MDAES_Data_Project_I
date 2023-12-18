@@ -13,3 +13,5 @@ Objeto sesión: Propuesta de sistema de asignación de las plazas hoteleras para
   - Pensión completa o no dependiendo del nivel adquisitivo. Ejemplo: Persona que tiene una buena pensión, bloquear opción de pensión completa para que gaste en los comercios locales.
   - Podemos intentar representar, a parte de diseñar el sistema más justo de asignación, la probabilidad de que te den el destino solicitado...
   - Hacer grupos de posibles destinos, darles una puntuación (un sistema de tiers) y a partir de ahí ver si se elige una del tier 2, se tiene opcion de elegir otro viaje antes que otro que tenga mas puntuacion por ir a un destino de menor calidad.
+  - Posesión de vehículo? Que estos tengan una menor puntuación frente a los que no disponen de vehículo.
+  - Patrimonio: No hacer sólo referencia a la masa monetaria. Si estos poseen viviendas diferentes a la habitual, catalogarlo como penalizable.
