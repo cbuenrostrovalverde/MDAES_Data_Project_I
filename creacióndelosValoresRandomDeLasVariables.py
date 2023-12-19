@@ -83,6 +83,9 @@ maxSalud=100
 minSalud=0
 df["Estado de salud"]=np.random.randint(minSalud,maxSalud, size=len(df))
 
+# Creación Columna Score:
+df["Score"]=0
+
 print(df.columns)
 print(df)
 
