@@ -1,6 +1,9 @@
 from creacióndelosValoresRandomDeLasVariables import df 
 
 def puntosEdad(edad):
+
+    if 60<edad>=65:
+        puntos=5
     return
 
 def puntosDiscapacidad(discapacidad):
