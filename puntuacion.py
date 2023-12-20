@@ -43,9 +43,13 @@ def puntosHabitacionIndividual(habitacionIndividual):
     return
 
 def puntosMobilidad(mobilidad):
+
+    
     return
 
 def puntosestadoSaludud(estado):
+    
+    
     return
 
 for indice, fila in df.iterrows():
