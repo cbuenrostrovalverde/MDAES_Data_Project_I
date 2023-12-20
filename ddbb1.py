@@ -7,14 +7,14 @@ Original file is located at
     https://colab.research.google.com/drive/12m9GZxrkmyXUPZg5Uqd5VBd_h5Q7TFuK
 """
 
-!pip install gender_guesser
+'pip install gender_guesser'
 
 import pandas as pd
 import numpy as np
 import random
-from gender_guesser.detector import Detector
+from gender_guesser import detector
 
-df = pd.read_csv('/content/sample_data/nombres_españoles.csv', sep = ';', header = None)
+df = pd.read_csv('nombres_españoles.csv', sep = ';', header = None)
 df = df.rename(columns={0: 'nombre', 1: 'apellido'})
 
 df['edad'] = np.random.randint(65, 100, 50000)
@@ -99,4 +99,3 @@ bins = [6774.54, 12600, 14700, 16800, 18900, 21000, 23100, 25200, 27300, 29400, 
 etiquetas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 df['tipo_pension'] = pd.cut(df['pension'], bins=bins, labels=etiquetas)
 
-df
