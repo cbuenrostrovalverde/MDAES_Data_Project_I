@@ -1,0 +1,23 @@
+version: 'latest'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=example
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=example
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  python:
+    container_name: python
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+
+
