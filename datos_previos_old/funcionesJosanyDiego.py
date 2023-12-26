@@ -132,15 +132,25 @@ def funcionListaEspera(listaEspera):
         score+=50
     return score
 
-#Lista Espera:
+# No se si habria que definir cuantos años lleva en lista de espera
 
-def funcionListaEspera(listaEspera):
+#Lista Espera: revisar si es igual a uno dos tres, etc...
+
+def funcionAñosAnterioresViajando():
     score=0
-    if df['Años Anteriores']== 1:
+    if df['Años Anteriores']== 0:
         score+=50
+    elif df['Años Anteriores']== 1:
+        score+=35
+    elif df['Años Anteriores']== 2:
+        score+=20
+    elif df['Años Anteriores']== 3:
+        score+=5
+    else:
+        score+=0
     return score
 
-# Numero Max viajes
+# Numero Max viajes, la dejo así pero no entiendo
 
 def maxViajes():
     score=0
@@ -152,3 +162,14 @@ def maxViajes():
         score+=30
     else:
         score=0
+
+# Funcion estado civil:
+
+def estado_civil():
+    score = 0
+    if df['estado_civil'] == 'casado/a':
+        (df['pension'] * 2) / 1.33
+        score += 10 
+    else:
+        score += 0
+    return score
