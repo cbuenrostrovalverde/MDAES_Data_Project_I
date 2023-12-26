@@ -1,0 +1,17 @@
+,id_precio,tipo_destino,duracion,transporte,sup_hab_ind,precio
+1,1,zona_costera,7,1,22,228.93
+2,2,zona_costera,9,0,22,253.65
+3,3,zona_costera,7,0,22,210.72
+4,4,zona_costera,9,1,22,290.07
+5,5,zona_baleares,7,1,22,267.63
+6,6,zona_baleares,9,0,22,253.77
+7,7,zona_baleares,7,0,22,210.47
+8,8,zona_baleares,9,1,22,331.49
+9,9,zona_canarias,7,1,24,355.3
+10,10,zona_canarias,9,0,24,253.65
+11,11,zona_canarias,7,0,24,210.39
+12,12,zona_canarias,9,1,24,435.95
+13,13,circuitos_culturales,5,1,26,293.16
+14,14,turismo_naturaleza,4,1,26,286.82
+15,15,capitales_provincia,3,1,26,124.68
+16,16,viaje_ceuta_melilla,4,1,26,286.82
