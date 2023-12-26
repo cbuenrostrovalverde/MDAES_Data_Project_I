@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS precios (
     id_precio SERIAL PRIMARY KEY,
     tipo_destino VARCHAR (25),
     duracion int,
-    transporte,
+    transporte boolean,
     sup_hab_ind int,
     precio int
 );
