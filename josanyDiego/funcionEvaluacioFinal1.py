@@ -129,4 +129,4 @@ print(df.columns)
 # print(df2)
 df3=df.groupby('id_persona')['score'].idxmax()
 
-for fila in df2:
+# for fila in df2:
