@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS destinos (
 
 CREATE TABLE IF NOT EXISTS viajes (
     id_viaje SERIAL PRIMARY KEY,
-    id_destino INTEGER,
-    id_precio INTEGER,
+    id_destino INT,
+    id_precio INT,
     FOREIGN KEY (id_destino) REFERENCES destinos (id_destino),
     FOREIGN KEY (id_precio) REFERENCES precios (id_precio)
 );
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS caract (
 
 CREATE TABLE IF NOT EXISTS fam_num (
     id_fam_num SERIAL PRIMARY KEY,
-    id_solicitante INTEGER,
+    id_solicitante INT,
     nombre VARCHAR(20),
     apellido VARCHAR(20),
     familia_numerosa BOOLEAN,
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS fam_num (
 
 CREATE TABLE IF NOT EXISTS habitacion (
     id_habitacion SERIAL PRIMARY KEY,
-    id_solicitante INTEGER,
+    id_solicitante INT,
     hab_ind BOOLEAN,
     FOREIGN KEY (id_solicitante) REFERENCES datos (id_solicitante)
 );
 
 CREATE TABLE IF NOT EXISTS pensiones (
     id_pensiones SERIAL PRIMARY KEY,
-    id_solicitante INTEGER,
+    id_solicitante INT,
     renta INT,
     pension INT,
     tipo_pension VARCHAR(10),
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS pensiones (
 
 CREATE TABLE IF NOT EXISTS viajero (
     id_viajero SERIAL PRIMARY KEY,
-    id_solicitante INTEGER,
+    id_solicitante INT,
     domicilio VARCHAR(30),
     vehiculo BOOLEAN,
     FOREIGN KEY (id_solicitante) REFERENCES datos (id_solicitante)
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS viajero (
 
 CREATE TABLE IF NOT EXISTS solicitudes (
     id_solicitud SERIAL PRIMARY KEY,
-    id_solicitante INTEGER,
-    id_viaje INTEGER,
+    id_solicitante INT,
+    id_viaje INT,
     FOREIGN KEY (id_solicitante) REFERENCES datos (id_solicitante),
     FOREIGN KEY (id_viaje) REFERENCES viajes (id_viaje)
 );
