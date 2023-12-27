@@ -28,8 +28,8 @@ cursor = conn.cursor()
 fake = Faker()
 
 # Generar datos para la tabla "clientes" como ejemplo
-for _ in range(50000):  # ajusta el número de filas que deseas generar
-    id_solicitante=""
+for i in range(50000):  # ajusta el número de filas que deseas generar
+    id_solicitante= i
     años_ant_viajado = np.random.randint(0,2)
     num_max_viaje_por_temp = np.random.randint(0,2)
     
@@ -64,7 +64,7 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 
-for _ in range(50000):  # ajusta el número de filas que deseas generar
+for i in range(50000):  # ajusta el número de filas que deseas generar
     id_solicitante="" # Revisar si tenemos que copiar en el init.sql los ides de la primera tabla
     años_ant_viajado = np.random.randint(60,90)
     num_max_viaje_por_temp = np.random.randint(0,2)
@@ -130,7 +130,7 @@ cursor = conn.cursor()
 
 fake= Faker() #Revisar si funciona
 
-for _ in range(50000):  # ajusta el número de filas que deseas generar
+for i in range(50000):  # ajusta el número de filas que deseas generar
     id_solicitante="" # Revisar si tenemos que copiar en el init.sql los ides de la primera tabla
     nombre=fake.name()
     apellido=fake.name() #Revisar si los apellidos se meten en juntos o separados en dos columnas
@@ -163,7 +163,7 @@ cursor = conn.cursor()
 
 fake= Faker() #Revisar si funciona
 
-for _ in range(50000):  
+for i in range(50000):  
     id_destino="" 
     destino=""
     tipo_destino=""
@@ -198,7 +198,7 @@ cursor = conn.cursor()
 
 
 
-for _ in range(50000):  
+for i in range(50000):  
     
     id_solicitante=""#Revisar si nos lo traemos de otra tabla
     nombre=""#Revisar si nos lo traemos de otra tabla
@@ -240,7 +240,7 @@ cursor = conn.cursor()
 
 
 
-for _ in range(50000):  
+for i in range(50000):  
     
     id_solicitante=""#Revisar si nos lo traemos de otra tabla
     hab_ind=np.random.randint(0,1)
@@ -275,7 +275,7 @@ cursor = conn.cursor()
 
 
 
-for _ in range(50000):  
+for i in range(50000):  
     
     id_solicitante=""#Revisar si nos lo traemos de otra tabla
     renta=np.random.randint()
@@ -312,7 +312,7 @@ conn = psycopg2.connect(
 # Crear un cursor
 cursor = conn.cursor()
 
-for _ in range(50000): 
+for i in range(50000): 
 
     id_precio =" "
     tipo_destino=""#revisar si ya está generado
@@ -348,7 +348,7 @@ conn = psycopg2.connect(
 # Crear un cursor
 cursor = conn.cursor()
 
-for _ in range(50000): 
+for i in range(50000): 
     id_solicitante = ''
     id_viaje =' '
 
@@ -379,7 +379,7 @@ conn = psycopg2.connect(
 # Crear un cursor
 cursor = conn.cursor()
 
-for _ in range(50000): 
+for i in range(50000): 
     id_solicitante=' '
     domicilio=' '
     vehiculo =np.random.randint(0,1)
@@ -412,7 +412,7 @@ conn = psycopg2.connect(
 # Crear un cursor
 cursor = conn.cursor()
 
-for _ in range(50000): 
+for i in range(50000): 
 
     id_viaje=" "
     id_destino =" "
