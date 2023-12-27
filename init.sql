@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS años_ant (
 
 CREATE TABLE IF NOT EXISTS caract (
     id_caract SERIAL PRIMARY KEY,
-    id_solicitante INTEGER,
+    id_solicitante INT,
     sexo VARCHAR(10),
     edad INT,
     trabajo VARCHAR(20),
