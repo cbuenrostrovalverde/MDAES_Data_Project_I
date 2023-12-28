@@ -2,3 +2,4 @@ pandas
 psycopg2
 faker
 gender-guesser
+unidecode

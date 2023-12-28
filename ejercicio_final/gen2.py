@@ -3,19 +3,22 @@ import numpy as np
 import random
 import psycopg2
 import time
+import unidecode
 from gender_guesser.detector import Detector
 from faker import Faker
 
 for i in range(1,2):
-    time.sleep(10)
+    time.sleep(20)
 
 conn = psycopg2.connect(host='postgres', dbname='project', user='project', password ='project')
 cur = conn.cursor()
 
 fake = Faker('es_ES')
-nombres = [fake.first_name() for _ in range(50000)]
-apellidos = [fake.last_name() for _ in range(50000)]
-data = {'nombre': nombres, 'apellido': apellidos}
+nombres_con_acentos = [fake.first_name() for _ in range(50000)]
+apellidos_con_acentos = [fake.last_name() for _ in range(50000)]
+nombres_sin_acentos = [unidecode.unidecode(nombre) for nombre in nombres_con_acentos]
+apellidos_sin_acentos = [unidecode.unidecode(apellido) for apellido in apellidos_con_acentos]
+data = {'nombre': nombres_sin_acentos, 'apellido': apellidos_sin_acentos}
 df_datos = pd.DataFrame(data)
 df_datos['id_solicitante'] = df_datos.index + 1
 df_datos = df_datos[['id_solicitante','nombre','apellido']]
@@ -33,7 +36,7 @@ df_caract['trabajo'] = None
 df_caract['movilidad'] = np.random.choice(['perfecta', 'media', 'limitada'], len(df_caract))
 df_caract['discapacidad'] = np.random.choice([True, False], len(df_caract))
 df_caract['enfermedad'] = np.random.choice([False] * 99 + [True], len(df_caract))
-df_caract['años_trabajados'] = np.random.randint(15, 41, len(df_caract))
+df_caract['anyos_trabajados'] = np.random.randint(15, 41, len(df_caract))
 
 gender_detector = Detector()
 def get_gender(name):
@@ -58,12 +61,12 @@ df_caract['enfermedad'] = np.random.choice([True, False], len(df_caract))
 df_caract['enfermedad'].fillna(False, inplace=True)
 df_caract['enfermedad'] = df_caract['enfermedad'].astype(bool)
 
-df_caract = df_caract[['id_caract','id_solicitante', 'sexo', 'edad', 'trabajo', 'años_trabajados',
+df_caract = df_caract[['id_caract','id_solicitante', 'sexo', 'edad', 'trabajo', 'anyos_trabajados',
        'movilidad', 'discapacidad', 'enfermedad']]
 
-caract_values = df_caract[['id_caract', 'id_solicitante', 'sexo', 'edad', 'trabajo', 'años_trabajados', 'movilidad', 'discapacidad', 'enfermedad']].values.tolist()
+caract_values = df_caract[['id_caract', 'id_solicitante', 'sexo', 'edad', 'trabajo', 'anyos_trabajados', 'movilidad', 'discapacidad', 'enfermedad']].values.tolist()
 cur.executemany(
-    "INSERT INTO caract (id_caract, id_solicitante, sexo, edad, trabajo, años_trabajados, movilidad, discapacidad, enfermedad) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    "INSERT INTO caract (id_caract, id_solicitante, sexo, edad, trabajo, anyos_trabajados, movilidad, discapacidad, enfermedad) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
     caract_values
 )
 
@@ -151,7 +154,7 @@ df_años_ant
 
 años_ant_values = df_años_ant[['id_solicitante', 'lista_espera', 'viaje_2021', 'viaje_2022', 'num_max_viaje_por_temp']].values.tolist()
 cur.executemany(
-    "INSERT INTO años_ant (id_solicitante, lista_espera, viaje_2021, viaje_2022, num_max_viaje_por_temp) VALUES (%s, %s, %s, %s, %s)",
+    "INSERT INTO anyos_ant (id_solicitante, lista_espera, viaje_2021, viaje_2022, num_max_viaje_por_temp) VALUES (%s, %s, %s, %s, %s)",
     años_ant_values
 )
 
@@ -265,24 +268,30 @@ df_viajes = pd.DataFrame({
 df_viajes.index = range(1, len(df_viajes) + 1)
 df_viajes['id_viaje'] = df_viajes.index
 df_viajes['destino'] = np.random.choice(destinos, len(df_viajes))
-
 mapeo_ids = df_destinos.set_index('destino')['id_destino']
 df_viajes['id_destino'] = df_viajes['destino'].map(mapeo_ids)
 
 mapeo_tipo = df_destinos.set_index('destino')['tipo_destino']
 df_viajes['tipo_destino'] = df_viajes['destino'].map(mapeo_tipo)
 
-tipo_destino_a_precio = {
-    'turismo_naturaleza': 14,
-    'circuitos_culturales': 13,
-    'capitales_provincia': 15,
-    'viaje_ceuta_melilla': 16,
-    'zona_canarias': np.random.choice([9, 10, 11, 12]),
-    'zona_baleares': np.random.choice([5, 6, 7, 8]),
-    'zona_costera': np.random.choice([1, 2, 3, 4])
-}
+def asignar_precio(row):
+    if row['tipo_destino'] == 'turismo_naturaleza':
+        return 14
+    elif row['tipo_destino'] == 'circuitos_culturales':
+        return 13
+    elif row['tipo_destino'] == 'capitales_provincia':
+        return 15
+    elif row['tipo_destino'] == 'viaje_ceuta_melilla':
+        return 16
+    elif row['tipo_destino'] == 'zona_canarias':
+        return np.random.randint(9, 13)
+    elif row['tipo_destino'] == 'zona_baleares':
+        return np.random.randint(5, 9)
+    elif row['tipo_destino'] == 'zona_costera':
+        return np.random.randint(1, 5)
 
-df_viajes['id_precio'] = df_viajes['tipo_destino'].map(tipo_destino_a_precio)
+df_viajes['id_precio'] = df_viajes.apply(asignar_precio, axis=1)
+
 df_viajes = df_viajes[['id_viaje', 'id_destino', 'id_precio']]
 
 viajes_values = df_viajes[['id_viaje', 'id_destino', 'id_precio']].values.tolist()

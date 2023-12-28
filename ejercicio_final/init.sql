@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS datos (
     apellido VARCHAR(50)
 );
 
-CREATE TABLE IF NOT EXISTS años_ant (
+CREATE TABLE IF NOT EXISTS anyos_ant (
     id_solicitante SERIAL PRIMARY KEY,
     lista_espera BOOLEAN,
     viaje_2021 BOOLEAN,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS caract (
     sexo VARCHAR(20),
     edad INT,
     trabajo VARCHAR(50),
-    años_trabajados INT,
+    anyos_trabajados INT,
     movilidad VARCHAR(20),
     discapacidad BOOLEAN,
     enfermedad BOOLEAN,
