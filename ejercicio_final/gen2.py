@@ -565,7 +565,7 @@ for viaje in range(1, 5001):
     if max_score_solicitante not in selected_solicitantes:
         selected_solicitantes.add(max_score_solicitante)
         restar_indices = (df['id_viaje'] != viaje) & (df['id_solicitante'] == max_score_solicitante)
-        df.loc[restar_indices, 'score_total'] -= 20
+        df.loc[restar_indices, 'score_total'] -= 100
 
 selected_indices = df.groupby('id_viaje')['score_total'].idxmax()
 df_selected = df.loc[selected_indices]
