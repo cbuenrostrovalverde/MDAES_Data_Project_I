@@ -557,11 +557,20 @@ df_aux['score_pension'] = df_aux.apply(asignacionPuntosPension, axis=1)
 df_aux['score_total'] = df_aux['score_total'] + df_aux['score_pension']
 df['score_total'] = df_aux['score_total']
 
-df['score_total'] = pd.to_numeric(df['score_total'], errors='coerce')
-max_score_indices = df.groupby('id_solicitante')['score_total'].transform('max') == df['score_total']
-df.loc[~max_score_indices, 'score_total'] -= 70
-max_score_indices = df.groupby('id_viaje')['score_total'].idxmax()
-df_max_scores = df.loc[max_score_indices, ['id_solicitante', 'nombre', 'apellido', 'score_total', 'id_viaje']]
+selected_solicitantes = set()
+for viaje in range(1, 5001):
+    max_score_indices = df['id_viaje'] == viaje
+    max_score_solicitante = df[max_score_indices].loc[df[max_score_indices]['score_total'].idxmax(), 'id_solicitante']
+    
+    if max_score_solicitante not in selected_solicitantes:
+        selected_solicitantes.add(max_score_solicitante)
+        restar_indices = (df['id_viaje'] != viaje) & (df['id_solicitante'] == max_score_solicitante)
+        df.loc[restar_indices, 'score_total'] -= 20
+
+selected_indices = df.groupby('id_viaje')['score_total'].idxmax()
+df_selected = df.loc[selected_indices]
+df_selected.to_json('/app/df_selected.json', orient='records')
 
 print(f'Lo hemos conseguido!')
-print(df_max_scores.head(300))
+print(df_selected.head(20))
+
