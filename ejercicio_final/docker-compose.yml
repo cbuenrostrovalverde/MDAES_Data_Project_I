@@ -20,7 +20,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - /Users/nacho/Documents/GitHub/MDAES_Data_Project_I/ejercicio_final:/app
+      - .:/app
 
 
 

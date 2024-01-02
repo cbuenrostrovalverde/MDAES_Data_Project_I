@@ -8,7 +8,7 @@ from gender_guesser.detector import Detector
 from faker import Faker
 
 for i in range(1,2):
-    time.sleep(20)
+    time.sleep(10)
 
 conn = psycopg2.connect(host='postgres', dbname='project', user='project', password ='project')
 cur = conn.cursor()
@@ -565,7 +565,7 @@ for viaje in range(1, 5001):
     if max_score_solicitante not in selected_solicitantes:
         selected_solicitantes.add(max_score_solicitante)
         restar_indices = (df['id_viaje'] != viaje) & (df['id_solicitante'] == max_score_solicitante)
-        df.loc[restar_indices, 'score_total'] -= 100
+        df.loc[restar_indices, 'score_total'] -= 80
 
 selected_indices = df.groupby('id_viaje')['score_total'].idxmax()
 df_selected = df.loc[selected_indices]
