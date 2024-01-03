@@ -549,7 +549,7 @@ def asignacionPuntosPension(row):
         ((row['pension']<31943) & (row['pension']>25653)),
         (row['pension']>31942)
     ]
-    scores_pension=[10,20,30,40,50]
+    scores_pension=[50,40,30,20,10]
     score_pension=np.select(condiciones_pensiones,scores_pension,default=0)
     return score_pension
 
