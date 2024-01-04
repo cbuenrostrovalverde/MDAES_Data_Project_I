@@ -1,5 +1,0 @@
-def funcionListaEspera(listaEspera):
-    score=0
-    if listaEspera== 1:
-        score+=50
-    return score
